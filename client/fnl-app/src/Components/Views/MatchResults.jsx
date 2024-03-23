@@ -22,7 +22,7 @@ const MatchResults = () => {
             setIsLoading(true); 
             try {
                 const token = await getAccessTokenSilently();
-                const response = await fetch('https://fnl-web-app-0146083bd90e.herokuapp.com/games/Games', {
+                const response = await fetch('https://fnl-hockey-app-a9bd72bb9787.herokuapp.com/games/Games', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
