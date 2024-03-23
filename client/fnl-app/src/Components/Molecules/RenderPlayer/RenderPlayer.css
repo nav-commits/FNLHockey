@@ -1,0 +1,9 @@
+.player-status {
+    display: flex;
+    gap: 20px;
+    background-color: #f2f2f2;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: grab;
+}

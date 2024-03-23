@@ -1,0 +1,30 @@
+.status-section {
+    padding: 10px;
+}
+
+.status-player {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #eee;
+}
+
+.actions-container {
+    display: flex;
+    gap: 20px;
+    margin: 10px;
+}
+
+.no-results {
+    text-align: center;
+}
+
+.team-stats-section {
+    padding: 10px;
+}
+
+.team-stats-section label {
+    display: block;
+    margin: 5px 0; /* Adjust as needed */
+}
+
+/* Add more styles as needed */
