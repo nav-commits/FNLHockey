@@ -49,7 +49,7 @@ const MatchUp = () => {
             try {
                 if (!isDeleted) {
                     const token = await getAccessTokenSilently();
-                    const response = await fetch(`https://fnl-web-app-0146083bd90e.herokuapp.com/playerStatus/status/${id}`, {
+                    const response = await fetch(`https://fnl-hockey-app-a9bd72bb9787.herokuapp.com/playerStatus/status/${id}`, {
                         headers: {
                             Authorization: `Bearer ${token}`,
                         },
@@ -143,7 +143,7 @@ const MatchUp = () => {
         e.preventDefault();
         try {
             const token = await getAccessTokenSilently();
-            const response = await fetch('https://fnl-web-app-0146083bd90e.herokuapp.com/games/Game', {
+            const response = await fetch('https://fnl-hockey-app-a9bd72bb9787.herokuapp.com/games/Game', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -162,7 +162,7 @@ const MatchUp = () => {
     const deletePlayerStatus = async (id) => {
         try {
             const token = await getAccessTokenSilently();
-            const response = await fetch(`https://fnl-web-app-0146083bd90e.herokuapp.com/playerStatus/delete/${id}`, {
+            const response = await fetch(`https://fnl-hockey-app-a9bd72bb9787.herokuapp.com/playerStatus/delete/${id}`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -274,7 +274,7 @@ const MatchUp = () => {
         e.preventDefault();
         try {
             const token = await getAccessTokenSilently();
-            const response = await fetch('https://fnl-web-app-0146083bd90e.herokuapp.com/games/Game', {
+            const response = await fetch('https://fnl-hockey-app-a9bd72bb9787.herokuapp.com/games/Game', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -292,7 +292,7 @@ const MatchUp = () => {
 
         try {
             const token = await getAccessTokenSilently();
-            const response = await fetch(`https://fnl-web-app-0146083bd90e.herokuapp.com/playerStatus/delete/${id}`, {
+            const response = await fetch(`https://fnl-hockey-app-a9bd72bb9787.herokuapp.com/playerStatus/delete/${id}`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${token}`,
