@@ -39,7 +39,7 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(bodyParser.json({ limit: '50mb' }));
 
 const corsOptions = {
-    origin: 'https://mellow-brigadeiros-d0430a.netlify.app',
+    origin: 'https://fnlhockey.com',
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 };
