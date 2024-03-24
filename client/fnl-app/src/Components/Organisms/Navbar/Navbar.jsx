@@ -1,14 +1,29 @@
 import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import mainContext from '../../../Context/Context';
+import IconButton from '@mui/material/IconButton';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import { useAuth0 } from '@auth0/auth0-react'; // Ensure this import is added
 import './Navbar.css';
 import myImage from '../../../Images/FNLBlack.png';
 
 function Navbar() {
     const { getID } = useContext(mainContext);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const { loginWithRedirect, logout, isAuthenticated } = useAuth0(); // Use useAuth0 here
+
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
     const getIDMatchUp = () => getID;
+
+    const handleAuthAction = () => {
+        if (isAuthenticated) {
+            logout({ returnTo: window.location.origin });
+        } else {
+            loginWithRedirect();
+        }
+    };
+
     const navLinks = [
         { path: '/', text: 'Home' },
         { path: '/Status', text: 'Status' },
@@ -44,6 +59,13 @@ function Navbar() {
                                 {text}
                             </NavLink>
                         ))}
+                        <IconButton
+                            color="inherit"
+                            onClick={handleAuthAction}
+                            aria-label={isAuthenticated ? 'Logout' : 'Login'}
+                        >
+                            {isAuthenticated ? <ExitToAppIcon /> : <AccountCircleIcon />}
+                        </IconButton>
                     </div>
                     <div className="overlay" onClick={toggleSidebar} style={{ position: 'fixed', top: 0, bottom: 0, left: 0, right: 0, zIndex: 100 }}></div>
                 </>
@@ -59,6 +81,14 @@ function Navbar() {
                         {text}
                     </NavLink>
                 ))}
+                <IconButton
+                    color="inherit"
+                    onClick={handleAuthAction}
+                    aria-label={isAuthenticated ? 'Logout' : 'Login'}
+                    style={{ marginLeft: 'auto' }} // Aligns the icon to the right
+                >
+                    {isAuthenticated ? <ExitToAppIcon /> : <AccountCircleIcon />}
+                </IconButton>
             </div>
         </nav>
     );

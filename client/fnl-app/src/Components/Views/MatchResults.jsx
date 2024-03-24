@@ -1,7 +1,6 @@
 import React from 'react';
 import { useContext, useEffect, useState } from 'react';
 import mainContext from '../../Context/Context';
-import Button from '../Atoms/Button/Button';
 import { useAuth0 } from '@auth0/auth0-react';
 import Results from '../Molecules/Results/Results';
 import Dropdown from '../Molecules/Dropdown/Dropdown';
@@ -69,16 +68,6 @@ const MatchResults = () => {
 
     return (
         <div style={{ padding: '20px' }}>
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'flex-end',
-                    margin: '20px',
-                }}
-            >
-                <Button title='Logout' color='#d9d9d9' width={'200px'} onClick={() => logout()} />
-            </div>
             <div style={{ position: 'relative' }}>
                 <Dropdown
                     weeks={weeks}
