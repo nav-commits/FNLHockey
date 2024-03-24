@@ -13,7 +13,6 @@ const MatchUpMobileTablet = ({
     handleChange,
     user,
     hasPlayers,
-    disabled 
 }) => {
     const { isMobile } = useDeviceDetect();
     return (

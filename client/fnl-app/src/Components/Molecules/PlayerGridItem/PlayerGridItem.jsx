@@ -3,7 +3,7 @@ import '../PlayerGridItem/PlayerGridItem.css';
 import teamWhite from '../../../Images/FNLWhiteBackground.png';
 import teamBlack from '../../../Images/FNLBlackWhiteBackground.png';
 
-function PlayerGridItem({ fnlPlayers }) {
+function PlayerGridItem({ fnlPlayers}) { 
     return (
         <div className='player-container'>
             {fnlPlayers.map((player, index) => (
@@ -18,6 +18,7 @@ function PlayerGridItem({ fnlPlayers }) {
                         style={{
                             display: 'flex',
                             gap: '10px',
+                            alignItems: 'center',
                         }}
                     >
                         {player.team.map((team, index) => (
