@@ -10,7 +10,6 @@ import { useEffect } from 'react';
 const PlayerStatusPanel = ({
     players,
     categories,
-    logout,
     handleSubmit,
     handleDrop,
     saveCategories,
@@ -45,9 +44,6 @@ const PlayerStatusPanel = ({
                 </div>
             ) : null}
 
-            <div className='logout-button-container'>
-                <Button title='Logout' color='#d9d9d9' width='200px' onClick={() => logout()} />
-            </div>
             <div>
                 <h2 className='player-section-title'>Current Roster of FNL Hockey</h2>
                 <p className='player-section-title'>Total Players: {players.length} </p>

@@ -14,7 +14,7 @@ import PlayerStatusMobileTablet from '../Organisms/PlayerStatusMobileTablet/Play
 function PlayerStatus() {
     const { players, setPlayers, setGetID } = useContext(mainContext);
     const [disabled, setDisabled] = useState(true);
-    const { getAccessTokenSilently, logout } = useAuth0();
+    const { getAccessTokenSilently } = useAuth0();
 
     const [categories, setCategories] = useState([
         { id: 'monthToMonth', name: 'monthToMonth', players: [] },
@@ -260,7 +260,6 @@ function PlayerStatus() {
                 <PlayerStatusPanel
                     players={players}
                     categories={categories}
-                    logout={logout}
                     handleSubmit={handleSubmit}
                     saveCategories={saveCategories}
                     disabled={disabled}

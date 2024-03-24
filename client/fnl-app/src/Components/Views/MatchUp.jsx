@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Button from '../Atoms/Button/Button';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
 import FNLRollCall from '../Organisms/FNLRollCall/FNLRollCall';
@@ -310,22 +309,6 @@ const MatchUp = () => {
         <>
             {!isMobile ? (
                 <>
-                    <div
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent: 'flex-end',
-                            margin: '20px',
-                        }}
-                    >
-                        <Button
-                            title='Logout'
-                            color='#d9d9d9'
-                            width={'200px'}
-                            onClick={() => logout()}
-                        />
-                    </div>
-
                     <>
                         {' '}
                         <FNLRollCall

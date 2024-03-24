@@ -18,6 +18,7 @@
     gap: 0.8rem;
     padding: 1rem; /* Adjust or remove padding based on your design needs */
     color: white;
+    align-items: center;
 }
 
 .link--container {

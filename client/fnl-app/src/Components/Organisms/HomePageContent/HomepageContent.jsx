@@ -1,21 +1,13 @@
 import React from 'react';
-import Button from '../../Atoms/Button/Button';
 import '../../Organisms/HomePageContent/HomePageContent.css';
 import goalieImage from '../../../Images/goalie.jpg';
 import goreMeadowsImage from '../../../Images/gore-meadows-skating-rink.jpg';
 import { stories } from '../../../Utils/Data';
 
-function HomePageContent({ authButton }) {
+function HomePageContent() {
     return (
         <>
-            <div className='auth-button-container'>
-                <Button
-                    title={authButton.title}
-                    color='#d9d9d9'
-                    width='200px'
-                    onClick={authButton.action}
-                />
-            </div>
+          
 
             <div className='mobile-home-page-content'>
                 <div>
