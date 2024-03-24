@@ -32,9 +32,7 @@ async function connect() {
         console.error('Error connecting to MongoDB');
     }
 }
-
 connect();
-
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(bodyParser.json({ limit: '50mb' }));
 
