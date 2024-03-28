@@ -10,7 +10,7 @@ import '../../Components/Molecules/Results/Results.css';
 
 const MatchResults = () => {
     const { matchupResults, setMatchResults } = useContext(mainContext);
-    const { getAccessTokenSilently, logout } = useAuth0();
+    const { getAccessTokenSilently } = useAuth0();
     const [open, setOpen] = React.useState(false);
     const [filterWeek, setFilterWeek] = React.useState([]);
     const [weekNumber, setWeekNumber] = React.useState(0);
@@ -21,7 +21,7 @@ const MatchResults = () => {
             setIsLoading(true); 
             try {
                 const token = await getAccessTokenSilently();
-                const response = await fetch('https://fnl-hockey-app-a9bd72bb9787.herokuapp.com/games/Games', {
+                const response = await fetch('https://fnlhockey.onrender.com/games/Games', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
