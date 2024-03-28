@@ -13,6 +13,7 @@ import ProtectedRoute from './ProtecedRoute/ProtectedRoute';
 import Footer from './Components/Organisms/Footer/Footer';
 import Schedule from './Components/Views/Schedule';
 import GoalieSchedule from './Components/Views/GoalieSchedule';
+import CustomErrorPage from './Components/Views/ErrorPage'; // Ensure this import is added
 
 function App() {
     return (
@@ -77,6 +78,7 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
+                     <Route path="/error" element={<CustomErrorPage />} /> {/* Custom Error Route */}
                 </Routes>
             </div>
 
