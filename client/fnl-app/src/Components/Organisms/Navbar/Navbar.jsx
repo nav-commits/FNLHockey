@@ -31,6 +31,8 @@ function Navbar() {
         { path: `/Match/${getIDMatchUp()}`, text: "Match" },
         { path: "/Scores", text: "Scores" },
         { path: "/Players", text: "Players" },
+        { path: "/Schedule", text: "Schedule" },
+        
       ]
     : [{ path: "/", text: "" }];
   return (
