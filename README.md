@@ -8,9 +8,9 @@
 
 Our sleek frontend, crafted with React.js, is deployed on Netlify, offering lightning-fast loading times and a secure browsing experience. Netlify's global CDN ensures that players and organizers can access our application from anywhere, without any lag or downtime.
 
-### > Backend on Heroku
+### > Backend on Render
 
-The robust backend, built with Node.js and Express.js, resides on Heroku. This cloud platform as a service enables us to manage our application's server-side logic and database interactions seamlessly. Heroku's powerful dynos ensure that our backend is always up and running, ready to handle requests from our users efficiently.
+The robust backend, built with Node.js and Express.js, is now deployed on Render. This service provides a more streamlined deployment and management process, enhancing the performance and reliability of our server-side logic and database interactions. Render's infrastructure ensures our backend is scalable, always up and running, and ready to handle requests from our users efficiently.
 
 ### > Authentication with Auth0
 
@@ -51,4 +51,5 @@ Ensure you have the following installed:
 ### Installation
 
 1. Clone the repository to your local machine:
-git clone https://github.com/nav-commits/FNLHockey.git
+   `git clone https://github.com/nav-commits/FNLHockey.git`
+
