@@ -19,7 +19,7 @@ const PlayersListContent = () => {
             setIsLoading(true); 
             try {
                 const token = await getAccessTokenSilently();
-                const response = await fetch('https://fnl-hockey-app-a9bd72bb9787.herokuapp.com/players/players', {
+                const response = await fetch('https://fnlhockey.onrender.com/players/players', {
                     headers: { Authorization: `Bearer ${token}` },
                 });
 

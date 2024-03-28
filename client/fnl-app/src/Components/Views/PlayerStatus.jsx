@@ -94,7 +94,7 @@ function PlayerStatus() {
         const categoriesObject = createCategoriesObject(categories);
         try {
             const token = await getAccessTokenSilently();
-            const response = await fetch('https://fnl-hockey-app-a9bd72bb9787.herokuapp.com/playerStatus/addPlayerStatus', {
+            const response = await fetch('https://fnlhockey.onrender.com/playerStatus/addPlayerStatus', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -128,7 +128,7 @@ function PlayerStatus() {
         const fetchPlayers = async () => {
             try {
                 const token = await getAccessTokenSilently();
-                const response = await fetch('https://fnl-hockey-app-a9bd72bb9787.herokuapp.com/players/players', {
+                const response = await fetch('https://fnlhockey.onrender.com/players/players', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -229,7 +229,7 @@ function PlayerStatus() {
         try {
             // Fetch original list of players from the backend
             const token = await getAccessTokenSilently();
-            const playersResponse = await fetch('players/players', {
+            const playersResponse = await fetch('https://fnlhockey.onrender.com/players/players', {
                 headers: { Authorization: `Bearer ${token}` },
             });
             const originalPlayers = await playersResponse.json();
