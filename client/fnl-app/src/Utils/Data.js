@@ -277,19 +277,7 @@ export const scheduleFNLHockey = [
         teams: { home: 'Team White', away: 'Team Black' },
     },
     {
-        date: '2024-06-21',
-        time: '8:00 PM',
-        arena: 'Gore Meadows',
-        teams: { home: 'Team White', away: 'Team Black' },
-    },
-    {
         date: '2024-06-28',
-        time: '8:00 PM',
-        arena: 'Gore Meadows',
-        teams: { home: 'Team White', away: 'Team Black' },
-    },
-    {
-        date: '2024-07-05',
         time: '8:00 PM',
         arena: 'Gore Meadows',
         teams: { home: 'Team White', away: 'Team Black' },
@@ -306,18 +294,7 @@ export const scheduleFNLHockey = [
         arena: 'Gore Meadows',
         teams: { home: 'Team White', away: 'Team Black' },
     },
-    {
-        date: '2024-07-26',
-        time: '8:00 PM',
-        arena: 'Gore Meadows',
-        teams: { home: 'Team White', away: 'Team Black' },
-    },
-    {
-        date: '2024-08-02',
-        time: '8:00 PM',
-        arena: 'Gore Meadows',
-        teams: { home: 'Team White', away: 'Team Black' },
-    },
+   
     {
         date: '2024-08-09',
         time: '8:00 PM',
@@ -463,25 +440,11 @@ export const fnlGoalieSchedule = [
         arena: 'Gore Meadows',
         goalies: { goalie1: 'Kenny', goalie2: 'KP' },
     },
-
-    {
-        date: '2024-06-21',
-        time: '8:00 PM',
-        arena: 'Gore Meadows',
-        goalies: { goalie1: 'Kenny', goalie2: 'Cali' },
-    },
     {
         date: '2024-06-28',
         time: '8:00 PM',
         arena: 'Gore Meadows',
         goalies: { goalie1: 'KP', goalie2: 'Cali' },
-    },
-
-    {
-        date: '2024-07-05',
-        time: '8:00 PM',
-        arena: 'Gore Meadows',
-        goalies: { goalie1: 'Kenny', goalie2: 'KP' },
     },
 
     {
@@ -496,13 +459,6 @@ export const fnlGoalieSchedule = [
         time: '8:00 PM',
         arena: 'Gore Meadows',
         goalies: { goalie1: 'KP', goalie2: 'Cali' },
-    },
-
-    {
-        date: '2024-08-02',
-        time: '8:00 PM',
-        arena: 'Gore Meadows',
-        goalies: { goalie1: 'Kenny', goalie2: 'KP' },
     },
 
     {
