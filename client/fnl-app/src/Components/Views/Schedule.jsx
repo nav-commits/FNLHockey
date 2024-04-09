@@ -7,7 +7,8 @@ import ScheduleGameItems from "../Organisms/ScheduleGameItems/ScheduleGameitems"
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
 import MUIButton from "../Atoms/Button/MUIButton";
-import '../../Components/Molecules/Dropdown/Dropdown.css';
+import "../../Components/Molecules/Dropdown/Dropdown.css";
+import { Box, Typography, Menu, MenuItem } from "@mui/material";
 
 const Schedule = () => {
   const [open, setOpen] = useState(false);
@@ -50,53 +51,75 @@ const Schedule = () => {
   };
   return (
     <>
-      <div
-        style={{ display: "flex", justifyContent: "space-between", margin: "20px" }}
-      >
-         <h1 style={{ padding: "10px" }}>Schedule</h1>
-         <MUIButton
+      <Box sx={{ display: "flex", justifyContent: "space-between", m: 2 }}>
+        <Typography variant="h4" sx={{ p: 1 }}>
+          Schedule
+        </Typography>
+        <MUIButton
           title="Goalie Schedule"
           onClick={moveToNextPage}
           icon={<ArrowForwardIcon />}
           color="white"
-          textColor="black" 
+          textColor="black"
           type="button"
         />
-       
-      </div>
-     
-      <div onClick={onClick} className="filter-dropdown-button">
-        <p style={{ textAlign: "center" }}>Filter By Year</p>
-      </div>
-      {open && (
-        <div className="week-filter-container">
-          {years.map((year, index) => (
-            <div
-              onClick={() => filterScheduleYear(year)}
-              key={index}
-              style={{
-                backgroundColor:
-                  year === selectedYear ? "rgb(217, 217, 217)" : null,
-              }}
-              className="week-item"
-            >
-              <p className="week-text">{year}</p>
-            </div>
-          ))}
-        </div>
-      )}
+      </Box>
 
-      <div>
-        {filterSchedule.map((game) => (
-          <ScheduleGameItems
-            key={game.date}
-            game={game}
-            getFormattedDate={getFormattedDate}
-            teamWhiteImage={teamWhiteImage}
-            teamBlackImage={teamBlackImage}
-          />
+      <Box
+         sx={{
+          width: 200,
+          border: 1,
+          borderColor: "#cfcdcd",
+          ml: 1,
+          mt: 1,
+          p: 1,
+          cursor: "pointer",
+        }}
+        onClick={onClick}
+      >
+        <Typography>Filter By Year</Typography>
+      </Box>
+      <Menu  id="simple-menu"
+        anchorEl={null}
+        keepMounted
+        open={open}
+        onClick={onClick}
+        sx={{
+          ".MuiPaper-root": {
+            border: 1,
+            borderColor: "#cfcdcd",
+            borderTop: 0,
+            maxWidth: 240,
+            maxHeight: 200,
+            overflowY: "auto",
+          },
+        }}>
+        {years.map((year) => (
+          <MenuItem
+            key={year}
+         
+            onClick={() => filterScheduleYear(year)}
+            sx={{
+              backgroundColor:
+                year === selectedYear ? "rgb(217, 217, 217)" : "inherit",
+              fontWeight: year === selectedYear ? 800 : 400,
+         
+            }}
+          >
+            {year}
+          </MenuItem>
         ))}
-      </div>
+      </Menu>
+
+      {filterSchedule.map((game) => (
+        <ScheduleGameItems
+          key={game.date}
+          game={game}
+          getFormattedDate={getFormattedDate}
+          teamWhiteImage={teamWhiteImage}
+          teamBlackImage={teamBlackImage}
+        />
+      ))}
     </>
   );
 };

@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { fnlGoalieSchedule } from "../../Utils/Data";
-import { useState } from "react";
-import GoalieScheduleGameItems from "../Organisms/GoalieScheduleItems/GoalieScheudleItems";
+import GoalieScheduleGameItems from "../../Components/Organisms/GoalieScheduleItems/GoalieScheudleItems"; // Ensure correct import path
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
+import { Box,Typography } from "@mui/material";
 import MUIButton from "../Atoms/Button/MUIButton";
+import { Menu, MenuItem } from "@mui/material";
 
 const GoalieSchedule = () => {
   const [open, setOpen] = useState(false);
@@ -14,11 +15,7 @@ const GoalieSchedule = () => {
   const getFormattedDate = (dateString) => {
     const dateObject = new Date(dateString + "T20:30:00");
     const options = { year: "numeric", month: "long", day: "numeric" };
-    const formattedDate = `Friday, ${dateObject.toLocaleDateString(
-      "en-US",
-      options
-    )}`;
-    return formattedDate;
+    return `Friday, ${dateObject.toLocaleDateString("en-US", options)}`;
   };
 
   const filterScheduleYear = (year) => {
@@ -30,9 +27,7 @@ const GoalieSchedule = () => {
     setFilterSchedule(filteredArray);
   };
 
-  const onClick = () => {
-    setOpen(!open);
-  };
+  const onClick = () => setOpen(!open);
 
   useEffect(() => {
     filterScheduleYear("2024");
@@ -41,19 +36,20 @@ const GoalieSchedule = () => {
   const years = ["2024", "2025", "2026", "2027", "2028"];
   const navigate = useNavigate();
 
-  const moveToNextPage = () => {
-    navigate("/Schedule");
-  };
+  const moveToNextPage = () => navigate("/Schedule");
+
   return (
     <>
-      <div
-        style={{
+      <Box
+        sx={{
           display: "flex",
           justifyContent: "space-between",
           margin: "20px",
         }}
       >
-        <h1 style={{ padding: "12px" }}>Goalie Schedule</h1>
+        <Typography variant="h4" sx={{ padding: "12px" }}>
+          Goalie Schedule
+        </Typography>
         <MUIButton
           title="Back"
           onClick={moveToNextPage}
@@ -61,30 +57,60 @@ const GoalieSchedule = () => {
           color="white"
           textColor="black"
           type="button"
-        />
-      </div>
-      <div onClick={onClick} className="filter-dropdown-button">
-        <p style={{ textAlign: "center" }}>Filter By Year</p>
-      </div>
-      {open && (
-        <div className="week-filter-container">
-          {years.map((year, index) => (
-            <div
-              onClick={() => filterScheduleYear(year)}
-              key={index}
-              style={{
-                backgroundColor:
-                  year === selectedYear ? "rgb(217, 217, 217)" : null,
-              }}
-              className="week-item"
-            >
-              <p className="week-text">{year}</p>
-            </div>
-          ))}
-        </div>
-      )}
+        >
+          Back
+        </MUIButton>
+      </Box>
 
-      <div>
+      <Box
+        sx={{
+          width: 200,
+          border: 1,
+          borderColor: "#cfcdcd",
+          ml: 1,
+          mt: 1,
+          p: 1,
+          cursor: "pointer",
+        }}
+        onClick={onClick}
+      >
+        <Typography textAlign="center">Filter By Year</Typography>
+      </Box>
+
+      <Menu
+        id="simple-menu"
+        anchorEl={null}
+        keepMounted
+        open={open}
+        onClick={onClick}
+        sx={{
+          ".MuiPaper-root": {
+            border: 1,
+            borderColor: "#cfcdcd",
+            borderTop: 0,
+            maxWidth: 240,
+            maxHeight: 200,
+            overflowY: "auto",
+          },
+        }}
+      >
+        {years.map((year, index) => (
+          <MenuItem
+            key={index}
+            onClick={() => filterScheduleYear(year)}
+            sx={{
+              backgroundColor:
+                year === selectedYear ? "rgb(217, 217, 217)" : "inherit",
+              fontWeight: year === selectedYear ? 800 : 400,
+         
+            }}
+          >
+            {year}
+          </MenuItem>
+        ))}
+      </Menu>
+
+      <Box>
         {filterSchedule.map((game) => (
           <GoalieScheduleGameItems
             key={game.date}
@@ -92,7 +118,7 @@ const GoalieSchedule = () => {
             getFormattedDate={getFormattedDate}
           />
         ))}
-      </div>
+      </Box>
     </>
   );
 };
