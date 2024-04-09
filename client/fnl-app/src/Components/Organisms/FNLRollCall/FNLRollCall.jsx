@@ -1,5 +1,8 @@
 import React from 'react';
-import './FNLRollCall.css';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 
 const FNLRollCall = ({
     statusOfPlayers,
@@ -7,9 +10,8 @@ const FNLRollCall = ({
     getKey,
     validKeys,
 }) => {
-
     return (
-        <div className="roll-call-container">
+        <Box sx={{ textAlign: 'center' }}>
             {
                 statusOfPlayers && (
                     (statusOfPlayers.monthToMonth?.players?.length > 0) ||
@@ -17,49 +19,66 @@ const FNLRollCall = ({
                     (statusOfPlayers.IR?.players?.length > 0) ||
                     (statusOfPlayers.fiftyFifty?.players?.length > 0)
                 ) ? (
-                    <div className='roll-call-content'>
-                        <h1>FNL Roll Call</h1>
-                        <h1>Players Status</h1>
-                        <h2>
+                    <Box>
+                        <Typography variant="h4" component="h4">FNL Roll Call</Typography>
+                        <Typography variant="h1" component="h2">Players Status</Typography>
+                        <Typography variant="h2" component="h3">
                             {new Date(statusOfPlayers.createdAt).toLocaleDateString('en-US', {
                                 year: 'numeric',
                                 month: 'long',
                                 day: 'numeric',
                             })}
-                        </h2>
-                    </div>
+                        </Typography>
+                    </Box>
                 ) : (
-                    <div className='roll-call-content'>
-                        <h1>FNL Roll Call</h1>
-                    </div>
+                    <Box sx={{mt: 3}}>
+                        <Typography variant="h4" component="h4">FNL Roll Call</Typography>
+                    </Box>
                 )
             }
-            <div className="status-container">
-                <div className="status-display">
-                    {statusOfPlayers && Object.keys(statusOfPlayers)
-                        .filter((key) => getKey(key, validKeys))
-                        .map((key) => (
-                            <div className="status-card" key={key}>
-                                <h2 className="status-title">{key}</h2>
+            <Box sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                gap: '50px',
+                justifyContent: 'center',
+                flexWrap: 'wrap',
+            }}>
+                {statusOfPlayers && Object.keys(statusOfPlayers)
+                    .filter((key) => getKey(key, validKeys))
+                    .map((key) => (
+                        <Card sx={{
+                            borderRadius: '10px',
+                            margin: '10px',
+                            padding: '20px',
+                            width: '250px',
+                            backgroundColor: '#eeeeee',
+                        }} key={key}>
+                            <CardContent>
+                                <Typography sx={{ color: 'black' }} variant="h2" component="h3">
+                                    {key}
+                                </Typography>
                                 {statusOfPlayers[key].players.map((singlePlayer, playerIndex) => (
-                                    <div key={playerIndex}>
-                                        <p
-                                            onDragStart={(e) => {
-                                                handleDragStart(e, singlePlayer, key);
-                                            }}
-                                            draggable
-                                            className="player-info"
-                                        >
-                                            {playerIndex + 1}. {singlePlayer.name}
-                                        </p>
-                                    </div>
+                                    <Box key={playerIndex} sx={{
+                                        backgroundColor: '#d9d9d9',
+                                        borderRadius: '5px',
+                                        padding: '10px',
+                                        margin: '10px 0',
+                                        cursor: 'grab',
+                                        fontWeight: 'bold',
+                                    }}
+                                        onDragStart={(e) => {
+                                            handleDragStart(e, singlePlayer, key);
+                                        }}
+                                        draggable
+                                    >
+                                        {playerIndex + 1}. {singlePlayer.name}
+                                    </Box>
                                 ))}
-                            </div>
-                        ))}
-                </div>
-            </div>
-
-        </div>
+                            </CardContent>
+                        </Card>
+                    ))}
+            </Box>
+        </Box>
     );
 };
 

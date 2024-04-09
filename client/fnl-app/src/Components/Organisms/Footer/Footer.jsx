@@ -1,44 +1,70 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './Footer.css';
+import { Link as RouterLink } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react'; // Ensure this import is added 
-import myImage from '../../../Images/FNLBlack.png';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import myImage from '../../../Images/FNLBlack.png';
 
 function Footer() {
     const { isAuthenticated } = useAuth0();
+    const linkStyle = {
+        display: 'block',
+        color: 'white',
+        textDecoration: 'none',
+        marginBottom: '5px',
+        '&:hover': {
+            textDecoration: 'underline',
+        },
+    };
     return (
-        <footer className="footer-container">
-            <div className="footer-logo">
+        <Box sx={{
+            display: 'flex',
+            justifyContent: 'space-evenly',
+            alignItems: 'center',
+            padding: '20px',
+            gap: { xs: '20px', md: '500px' }, // Responsive gap
+            backgroundColor: 'black',
+            color: 'white',
+            flexDirection: { xs: 'column', md: 'row' }, // Responsive direction
+        }}>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <img
                     src={myImage}
                     alt='Description'
                     style={{ height: '60px', width: '60px' }}
                 />
-                <h1 className='FNL-hockey'>FNL</h1>
-            </div>
-            <div className="footer-content">
-                <div className="footer-column">
-                {isAuthenticated && (
-                    <>
-                       <h3>Quick Links</h3>
-                    <Link to="/">Home</Link>
-                    <Link to="/Status">Status</Link>
-                    <Link to="/Match">Match</Link>
-                    <Link to="/Scores">Scores</Link>
-                    <Link to="/Players">Players</Link>
-                    <Link to="/Schedule">Schedule</Link>
-                    </>
-                )}
-                   
-                </div>
-                <div className="footer-column">
-                    <h3>Social Media</h3>
-                    <Link to="https://www.instagram.com/fnl_hockey"><InstagramIcon/></Link>
-                </div>
-            </div>
-        </footer>
+                <Typography variant="h1" component="h1" sx={{ fontSize: '2rem', fontStyle:'italic' }}>FNL</Typography>
+            </Box>
+            <Box sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                gap: '120px',
+                flexWrap: 'wrap',
+            }}>
+                <Box>
+                    {isAuthenticated && (
+                        <>
+                            <Typography variant="h3" sx={{ marginBottom: '10px', fontSize: '1.25rem' }}>Quick Links</Typography>
+                            <Link component={RouterLink} to="/" sx={linkStyle}>Home</Link>
+                            <Link component={RouterLink} to="/Status" sx={linkStyle}>Status</Link>
+                            <Link component={RouterLink} to="/Match" sx={linkStyle}>Match</Link>
+                            <Link component={RouterLink} to="/Scores" sx={linkStyle}>Scores</Link>
+                            <Link component={RouterLink} to="/Players" sx={linkStyle}>Players</Link>
+                            <Link component={RouterLink} to="/Schedule" sx={linkStyle}>Schedule</Link>
+                        </>
+                    )}
+                </Box>
+                <Box>
+                    <Typography variant="h3" sx={{ marginBottom: '10px', fontSize: '1.25rem' }}>Social Media</Typography>
+                    <Link href="https://www.instagram.com/fnl_hockey" sx={linkStyle}><InstagramIcon /></Link>
+                </Box>
+            </Box>
+        </Box>
     );
 }
 
 export default Footer;
+

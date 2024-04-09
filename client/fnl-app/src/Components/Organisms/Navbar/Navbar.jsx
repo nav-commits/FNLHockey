@@ -1,21 +1,32 @@
 import React, { useContext, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import mainContext from "../../../Context/Context";
-import IconButton from "@mui/material/IconButton";
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import { useAuth0 } from "@auth0/auth0-react"; // Ensure this import is added
-import "./Navbar.css";
+import MenuIcon from "@mui/icons-material/Menu"; // For the hamburger menu
+import { useAuth0 } from "@auth0/auth0-react";
 import myImage from "../../../Images/FNLBlack.png";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 function Navbar() {
   const { getID } = useContext(mainContext);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { loginWithRedirect, logout, isAuthenticated } = useAuth0(); // Use useAuth0 here
+  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const getIDMatchUp = () => getID;
-
   const handleAuthAction = () => {
     if (isAuthenticated) {
       logout({ returnTo: window.location.origin });
@@ -23,7 +34,9 @@ function Navbar() {
       loginWithRedirect();
     }
   };
-  // Only show certain links if authenticated
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   const navLinks = isAuthenticated
     ? [
         { path: "/", text: "Home" },
@@ -32,80 +45,115 @@ function Navbar() {
         { path: "/Scores", text: "Scores" },
         { path: "/Players", text: "Players" },
         { path: "/Schedule", text: "Schedule" },
-        
       ]
     : [{ path: "/", text: "" }];
+  const location = useLocation();
   return (
-    <nav className="nav--container">
-      <div className="logo--container">
-        <Link to="/">
-          <img
-            src={myImage}
-            alt="Logo"
-            style={{ height: "60px", width: "60px" }}
-          />
-        </Link>
-        <h1 className="FNL-hockey">FNL</h1>
-      </div>
-      <button onClick={toggleSidebar} className="hamburger-menu">
-        ☰
-      </button>
-      {isSidebarOpen && (
-        <>
-          <div className="sidebar">
-            {navLinks.map(({ path, text }) => (
-              <NavLink
-                key={path}
-                to={path}
-                className="link--container"
-                activeclassname="active"
+    <AppBar position="sticky" sx={{ bgcolor: "black", p: 1 }}>
+      {!isMobile && (
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            alignItems: "center",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexGrow: 1,
+              justifyContent: "space-evenly",
+            }}
+          >
+            <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
+              <Link to="/">
+                <img
+                  src={myImage}
+                  alt="Logo"
+                  style={{ height: "60px", width: "60px" }}
+                />
+              </Link>
+              <Typography
+                variant="h6"
+                sx={{ fontStyle: "italic", color: "white" }}
               >
-                {text}
-              </NavLink>
-            ))}
+                FNL
+              </Typography>
+            </Box>
+
+            <List
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                padding: 0,
+                gap: "10px", // Reduce gap between items if needed
+              }}
+            >
+              {navLinks.map(({ path, text }) => (
+                <ListItem
+                  key={path}
+                  component={Link}
+                  to={path}
+                  sx={{
+                    color: "white",
+                    textDecoration: "none",
+                    borderBottom:
+                      location.pathname === path ? "3px solid white" : "none",
+                    py: 0.5, // Reduce vertical padding
+                    px: 1, // Adjust horizontal padding as needed
+                    "&:hover": { backgroundColor: "transparent" },
+                    // Further adjustment for the active link to reduce space below
+                    marginBottom: location.pathname === path ? "-3px" : 0, // Adjust if active link has too much space below
+                    justifyContent: "center",
+                  }}
+                >
+                  <ListItemText primary={text} sx={{ my: 0 }} />{" "}
+                  {/* Minimize vertical margin within the item */}
+                </ListItem>
+              ))}
+            </List>
             <IconButton
-              color="inherit"
               onClick={handleAuthAction}
+              sx={{ color: "white" }}
               aria-label={isAuthenticated ? "Logout" : "Login"}
             >
               {isAuthenticated ? <ExitToAppIcon /> : <AccountCircleIcon />}
             </IconButton>
-          </div>
-          <div
-            className="overlay"
+          </Box>
+        </Toolbar>
+      )}
+
+      {isMobile && (
+        <>
+          <IconButton
+            sx={{ color: "white", ml: "auto" }}
             onClick={toggleSidebar}
-            style={{
-              position: "fixed",
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              zIndex: 100,
-            }}
-          ></div>
+          >
+            <MenuIcon />
+          </IconButton>
+          <Drawer anchor="left" open={isSidebarOpen} onClose={toggleSidebar}>
+            <List sx={{ width: "250px" }}>
+              {navLinks.map(({ path, text }) => (
+                <ListItem
+                  button
+                  key={path}
+                  component={Link}
+                  to={path}
+                  onClick={toggleSidebar}
+                >
+                  <ListItemText primary={text} />
+                </ListItem>
+              ))}
+              <ListItem button onClick={handleAuthAction}>
+                <ListItem>
+                  {isAuthenticated ? <ExitToAppIcon /> : <AccountCircleIcon />}
+                </ListItem>
+              </ListItem>
+            </List>
+          </Drawer>
         </>
       )}
-      <div className="link-container--container">
-        {navLinks.map(({ path, text }) => (
-          <NavLink
-            key={path}
-            to={path}
-            className="link--container"
-            activeclassname="active"
-          >
-            {text}
-          </NavLink>
-        ))}
-        <IconButton
-          color="inherit"
-          onClick={handleAuthAction}
-          aria-label={isAuthenticated ? "Logout" : "Login"}
-          style={{ marginLeft: "auto" }} // Aligns the icon to the right
-        >
-          {isAuthenticated ? <ExitToAppIcon /> : <AccountCircleIcon />}
-        </IconButton>
-      </div>
-    </nav>
+    </AppBar>
   );
 }
 

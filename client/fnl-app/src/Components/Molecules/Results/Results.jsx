@@ -1,105 +1,83 @@
 import React from 'react';
-import '../Results/Results.css';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import teamWhite from '../../../Images/FNLWhiteBackground.png';
 import teamBlack from '../../../Images/FNLBlackWhiteBackground.png';
+import { useTheme } from '@mui/material/styles';
 
 const Results = ({ filterWeek, weekNumber, formattedDate }) => {
+    const theme = useTheme();
     return (
-        <div className='match-results-container'>
+        <Box sx={{
+            display: 'flex', 
+            justifyContent: 'center', 
+            flexWrap: 'wrap', 
+            '& > :not(style)': { m: 1 }
+        }}>
             {filterWeek.length > 0 ? (
                 filterWeek.map((formData, index) => (
-                    <div key={index} className='match-result-card'>
-                        <h3 className='match-result-heading'>Week {weekNumber}</h3>
-                        {formData.seriesWinner.winner.length > 0 ? (
-                            <p>FINAL</p>
-                        ) : (
-                            <p>8:00PM EST</p>
-                        )}
-                        <p className='match-result-date'>{formattedDate}</p>
-                        {Object.keys(formData)
-                            .filter(
-                                (team) =>
-                                    !['_id', 'createdAt', '__v', 'Goalie', 'seriesWinner'].includes(
-                                        team
-                                    )
-                            )
-                            .map((team) => (
-                                <div key={team}>
-                                    {team === 'teamWhite' || team === 'teamBlack' ? (
-                                        <div style={{ marginBottom: '40px' }}>
-                                            <div className='match-results-team-content'>
-                                                <img
-                                                    src={
-                                                        team === 'teamWhite' ? teamWhite : teamBlack
-                                                    }
-                                                    alt={`Team ${
-                                                        team === 'teamWhite' ? 'White' : 'Black'
-                                                    } Logo`}
-                                                    style={{ height: '40px', width: '40px' }}
-                                                />
-                                                <p>
-                                                    {team === 'teamWhite'
-                                                        ? ' Team White'
-                                                        : ' Team Black'}
-                                                </p>
-                                                {/* Display Wins, Losses, Ties */}
-                                            </div>
-                                            <div
-                                                style={{
-                                                    display: 'flex',
-                                                    gap: '10px',
-                                                    alignItems: 'center',
-                                                }}
-                                            >
-                                                {formData[team].players.map(
-                                                    (player, playerIndex) => (
-                                                        <div
-                                                            key={playerIndex}
-                                                            style={{
-                                                                display: 'flex',
-                                                                gap: '5px',
-                                                                backgroundColor: '#f2f2f2',
-                                                                padding: '5px',
-                                                            }}
-                                                        >
-                                                            {/* Player display logic */}
-                                                            <p style={{ fontSize: '12px' }}>
-                                                                {player.name}
-                                                            </p>
-                                                        </div>
-                                                    )
-                                                )}
-                                            </div>
-                                            <p>
-                                                Record {formData[team].wins}-{formData[team].losses}
-                                                -{formData[team].ties}
-                                            </p>
-                                        </div>
-                                    ) : null}
-                                </div>
-                            ))}
-                        {formData.seriesWinner.winner && (
-                            <div className='match-results-winner'>
-                                Series Winner{' '}
-                                <img
-                                    src={
-                                        formData.seriesWinner.winner === 'white'
-                                            ? teamWhite
-                                            : teamBlack
-                                    }
-                                    alt={`Team ${
-                                        formData.seriesWinner.winner === 'white' ? 'White' : 'Black'
-                                    } Logo`}
-                                    style={{ height: '40px', width: '40px' }}
-                                />
-                            </div>
-                        )}
-                    </div>
+                    <Card key={index} sx={{
+                        minWidth: 280, 
+                        margin: theme.spacing(2.5),
+                        borderColor: '#e0e0e0',
+                        borderWidth: '1px',
+                        borderStyle: 'solid',
+                        borderRadius: 2,
+                        padding: theme.spacing(2.5),
+                        backgroundColor: 'white',
+                        color: 'black',
+                    }}>
+                        <CardContent>
+                            <Typography sx={{ marginBottom: theme.spacing(2) }} variant="h5">Week {weekNumber}</Typography>
+                            <Typography variant="body1">{formData.seriesWinner.winner.length > 0 ? 'FINAL' : '8:00PM EST'}</Typography>
+                            <Typography sx={{ marginBottom: theme.spacing(2) }} variant="body2">{formattedDate}</Typography>
+                            {Object.keys(formData)
+                                .filter(team => !['_id', 'createdAt', '__v', 'Goalie', 'seriesWinner'].includes(team))
+                                .map((team) => (
+                                    team === 'teamWhite' || team === 'teamBlack' ? (
+                                        <Box key={team} sx={{ marginBottom: theme.spacing(5) }}>
+                                            <Box sx={{
+                                                display: 'flex', 
+                                                gap: theme.spacing(1.25), 
+                                                alignItems: 'center', 
+                                                marginBottom: theme.spacing(2.5)
+                                            }}>
+                                                <img src={team === 'teamWhite' ? teamWhite : teamBlack} alt={`Team ${team === 'teamWhite' ? 'White' : 'Black'} Logo`} style={{ height: '40px', width: '40px' }} />
+                                                <Typography variant="body1">
+                                                    {team === 'teamWhite' ? ' Team White' : ' Team Black'}
+                                                </Typography>
+                                            </Box>
+                                            <Box sx={{ display: 'flex', gap: theme.spacing(1.25), alignItems: 'center' }}>
+                                                {formData[team].players.map((player, playerIndex) => (
+                                                    <Box key={playerIndex} sx={{
+                                                        display: 'flex', 
+                                                        gap: theme.spacing(0.625), 
+                                                        backgroundColor: '#f2f2f2', 
+                                                        padding: theme.spacing(0.625)
+                                                    }}>
+                                                        <Typography variant="caption">{player.name}</Typography>
+                                                    </Box>
+                                                ))}
+                                            </Box>
+                                            <Typography variant="body1">Record {formData[team].wins}-{formData[team].losses}-{formData[team].ties}</Typography>
+                                        </Box>
+                                    ) : null
+                                ))}
+                            {formData.seriesWinner.winner && (
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: theme.spacing(1.25) }}>
+                                    Series Winner 
+                                    <img src={formData.seriesWinner.winner === 'white' ? teamWhite : teamBlack} alt={`Team ${formData.seriesWinner.winner === 'white' ? 'White' : 'Black'} Logo`} style={{ height: '40px', width: '40px' }} />
+                                </Box>
+                            )}
+                        </CardContent>
+                    </Card>
                 ))
             ) : (
-                <h3 className='match-result-no-results'>No match results</h3>
+                <Typography variant="h6" color="textSecondary">No match results</Typography>
             )}
-        </div>
+        </Box>
     );
 };
 

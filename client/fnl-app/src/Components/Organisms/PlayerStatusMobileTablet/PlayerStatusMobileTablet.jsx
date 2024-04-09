@@ -1,6 +1,7 @@
 import React from "react";
-import Button from "../../Atoms/Button/Button";
-import "./PlayerStatusMobileTablet.css";
+import MUIButton from "../../Atoms/Button/MUIButton";
+import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
+import  { Box, Typography, Radio, RadioGroup, FormControlLabel } from "@mui/material";
 
 function PlayerStatusMobileTablet({
   players,
@@ -8,69 +9,84 @@ function PlayerStatusMobileTablet({
   handleSubmit,
   handleSave,
   categories,
-
 }) {
   return (
-    <div>
-      {players.map((player) => (
-        <div key={player._id} className="player-status-card">
-          <div>
-            {player.name} - {player.position}
-            <div className="status-options">
-              {["monthToMonth", "weekToWeek", "IR", "fiftyFifty"].map(
-                (status) => (
-                  <label key={status} className="status-label">
-                    <input
-                      type="radio"
-                      value={status}
-                      name={player.id ? player.id.toString() : ""}
-                      checked={player.status === status}
-                      onChange={(e) =>
-                        handleStatusChange(player._id, e.target.value)
-                      }
-                    />
-                    {status}
-                  </label>
-                )
-              )}
-            </div>
-          </div>
-        </div>
-      ))}
-      <div className="actions-container">
-        <Button
-          title="Save"
-          color="black"
-          textColor="white"
-          width={"180px"}
-          onClick={handleSave}
-        />
-
-        <Button
-          title="Submit"
-          color="#d9d9d9"
-          width={"200px"}
-          onClick={handleSubmit}
-        />
-      </div>
-      <div className="categories-card categories-animation">
-        <h3 className="categories-card-title">Current Status</h3>
-        {categories.length > 0 &&
-          categories.map((cat) => (
-            <div style={{ padding: "5px", marginBottom: "10px" }} key={cat.id}>
-              <h4>{cat.name}</h4>
-              {cat.players.map((player) => (
-                <div style={{ padding: "5px" }} key={player._id}>
-                  <p>
-                    <b>{player.name}</b> - {player.position}
-                  </p>
-                </div>
-              ))}
-            </div>
+    <Box sx={{ p: 1 }}>
+    {players.map((player) => (
+      <Box key={player._id} sx={{
+        p: 2,
+        fontWeight: 'bold',
+        borderRadius: '5px',
+        backgroundColor: '#f2f2f2',
+        mb: 1,
+      }}>
+        <Typography>{player.name} - {player.position}</Typography>
+        <RadioGroup
+          name={player.id ? player.id.toString() : ""}
+          value={player.status}
+          onChange={(e) => handleStatusChange(player._id, e.target.value)}
+          sx={{ flexDirection: 'column', mt: 1, gap: '10px' }}
+        >
+          {["monthToMonth", "weekToWeek", "IR", "fiftyFifty"].map(status => (
+            <FormControlLabel
+              key={status}
+              value={status}
+              control={<Radio />}
+              label={status}
+              sx={{ cursor: 'pointer' }}
+            />
           ))}
-      </div>
-    </div>
+        </RadioGroup>
+      </Box>
+    ))}
+    <Box sx={{ display: 'flex', gap: '20px', m: 1 }}>
+    <MUIButton
+        title="Save"
+        icon={<KeyboardArrowRightOutlinedIcon />}
+        textColor='black'
+        width={"180px"}
+        onClick={handleSave}
+      />
+
+      <MUIButton
+        title="Submit"
+        icon={<KeyboardArrowRightOutlinedIcon />}
+        textColor='black'
+        width={"200px"}
+        onClick={handleSubmit}
+      />
+    </Box>
+    <Box sx={{
+      animation: 'slideUp 0.3s ease-out forwards',
+      transform: 'translateY(100%)',
+      bgcolor: 'white',
+      boxShadow: '0 -2px 10px rgba(0, 0, 0, 0.1)',
+      p: 2,
+      borderTop: '1px solid #ccc',
+      borderRadius: '5px',
+      overflowY: 'auto',
+      maxHeight: '120vh',
+      mt: 2,
+      '@keyframes slideUp': {
+        to: { transform: 'translateY(0)' },
+      },
+    }}>
+      <Typography variant="h6" sx={{ textAlign: 'center' }}>Current Status</Typography>
+      {categories.length > 0 && categories.map((cat) => (
+        <Box key={cat.id} sx={{ p: '5px', mb: '10px' }}>
+          <Typography variant="h6">{cat.name}</Typography>
+          {cat.players.map((player) => (
+            <Typography key={player._id} sx={{ p: '5px' }}>
+              <b>{player.name}</b> - {player.position}
+            </Typography>
+          ))}
+        </Box>
+      ))}
+    </Box>
+  </Box>
   );
 }
 
 export default PlayerStatusMobileTablet;
+
+

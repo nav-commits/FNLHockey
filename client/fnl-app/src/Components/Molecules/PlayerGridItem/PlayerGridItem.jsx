@@ -1,50 +1,94 @@
-import React from 'react';
-import '../PlayerGridItem/PlayerGridItem.css';
-import teamWhite from '../../../Images/FNLWhiteBackground.png';
-import teamBlack from '../../../Images/FNLBlackWhiteBackground.png';
+import React from "react";
+import { Box, Typography } from "@mui/material";
+import teamWhite from "../../../Images/FNLWhiteBackground.png";
+import teamBlack from "../../../Images/FNLBlackWhiteBackground.png";
 
-function PlayerGridItem({ fnlPlayers}) { 
-    return (
-        <div className='player-container'>
-            {fnlPlayers.map((player, index) => (
-                <div key={index} className='player-content'>
-                    {/* <img src={player.img} alt={player.name} className='card-image' /> */}
-                    <div style={{ height: '40px', width: '40px', borderRadius: '20px', backgroundColor: 'lightgrey' }} />
-                    <h3>
-                        {' '}
-                        <b>{player.name}</b>
-                    </h3>
-                    <div
-                        style={{
-                            display: 'flex',
-                            gap: '10px',
-                            alignItems: 'center',
-                        }}
-                    >
-                        {player.team.map((team, index) => (
-                            <div key={index}>
-                                {team === 'white' ? (
-                                    <img
-                                        src={teamWhite}
-                                        alt='Team White Logo'
-                                        style={{ height: '40px', width: '40px' }}
-                                    />
-                                ) : (
-                                    <img
-                                        src={teamBlack}
-                                        alt='Team Black Logo'
-                                        style={{ height: '40px', width: '40px' }}
-                                    />
-                                )}
-                            </div>
-                        ))}
-                        <p className='player-number'># {player.number}</p>
-                        <p>{player.position}</p>
-                    </div>
-                </div>
+function PlayerGridItem({ fnlPlayers }) {
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "20px",
+        paddingTop: "24px",
+        justifyContent: "center",
+      }}
+    >
+      {fnlPlayers.map((player, index) => (
+        <Box
+          key={index}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            width: "40%",
+            alignItems: "center",
+            borderBottom: "1px solid #e0e0e0",
+            mb: 2,
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              width: "100%",
+              mb: 1,
+            }}
+          >
+            {/* Placeholder for the player image */}
+            <Box
+              sx={{
+                height: "40px",
+                width: "40px",
+                borderRadius: "20px",
+                backgroundColor: "lightgrey",
+              }}
+            />
+          </Box>
+          <Typography
+            variant="h6"
+            component="h3"
+            sx={{ fontWeight: "bold", mt: 1 }}
+          >
+            {player.name}
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "20px",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+            }}
+          >
+            {player.team.map((team, index) => (
+              <Box key={index} sx={{}}>
+                <img
+                  src={team === "white" ? teamWhite : teamBlack}
+                  alt={`Team ${
+                    team.charAt(0).toUpperCase() + team.slice(1)
+                  } Logo`}
+                  style={{
+                    height: "auto",
+                    width: "50px",
+                  }}
+                />
+              </Box>
             ))}
-        </div>
-    );
+            <Typography
+              sx={{
+                borderRight: "solid 1px #e0e0e0",
+                borderLeft: "solid 1px #e0e0e0",
+                padding: "0 8px", // From .player-number
+              }}
+            >
+              # {player.number}
+            </Typography>
+            <Typography>{player.position}</Typography>
+          </Box>
+        </Box>
+      ))}
+    </Box>
+  );
 }
 
 export default PlayerGridItem;

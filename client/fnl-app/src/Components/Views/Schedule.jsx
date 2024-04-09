@@ -6,6 +6,8 @@ import { useState } from "react";
 import ScheduleGameItems from "../Organisms/ScheduleGameItems/ScheduleGameitems";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
+import MUIButton from "../Atoms/Button/MUIButton";
+import '../../Components/Molecules/Dropdown/Dropdown.css';
 
 const Schedule = () => {
   const [open, setOpen] = useState(false);
@@ -52,9 +54,15 @@ const Schedule = () => {
         style={{ display: "flex", justifyContent: "space-between", margin: "20px" }}
       >
          <h1 style={{ padding: "10px" }}>Schedule</h1>
-        <span onClick={moveToNextPage} style={{ display: "flex", alignItems: "center", cursor:'pointer' }}>
-          <p>Goalie Schedule</p> <ArrowForwardIcon />{" "}
-        </span>
+         <MUIButton
+          title="Goalie Schedule"
+          onClick={moveToNextPage}
+          icon={<ArrowForwardIcon />}
+          color="white"
+          textColor="black" 
+          type="button"
+        />
+       
       </div>
      
       <div onClick={onClick} className="filter-dropdown-button">
