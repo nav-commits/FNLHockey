@@ -6,7 +6,7 @@
 
 ### > Frontend on Netlify
 
-Our sleek frontend, crafted with React.js, is deployed on Netlify, offering lightning-fast loading times and a secure browsing experience. Netlify's global CDN ensures that players and organizers can access our application from anywhere, without any lag or downtime.
+Our sleek frontend, crafted with React.js and enhanced with Material-UI for sleek, component-based CSS styling that adheres to modern design principles, is deployed on Netlify, offering lightning-fast loading times and a secure browsing experience. Netlify's global CDN ensures that players and organizers can access our application from anywhere, without any lag or downtime.
 
 ### > Backend on Render
 
@@ -25,7 +25,7 @@ Security is our top priority. We have integrated Auth0 for authentication to pro
 
 ## 🛠 Tech Stack
 
-- **Frontend:** React.js for a dynamic and responsive user interface.
+- **Frontend:** React.js for a dynamic and responsive user interface. Enhanced with Material-UI for sleek, component-based CSS styling that adheres to modern design principles.
 - **Backend:** Node.js with Express.js for efficient server-side logic.
 - **Database:** MongoDB for scalable and flexible data storage.
 - **Authentication:** Auth0 for secure and reliable user authentication.
