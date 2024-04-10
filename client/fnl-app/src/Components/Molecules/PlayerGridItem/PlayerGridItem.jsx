@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import teamWhite from "../../../Images/FNLWhiteBackground.png";
 import teamBlack from "../../../Images/FNLBlackWhiteBackground.png";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 function PlayerGridItem({ fnlPlayers }) {
   return (
@@ -34,15 +35,7 @@ function PlayerGridItem({ fnlPlayers }) {
               mb: 1,
             }}
           >
-            {/* Placeholder for the player image */}
-            <Box
-              sx={{
-                height: "40px",
-                width: "40px",
-                borderRadius: "20px",
-                backgroundColor: "lightgrey",
-              }}
-            />
+            <AccountCircleIcon fontSize="large"color='gray' />
           </Box>
           <Typography
             variant="h6"
@@ -54,7 +47,6 @@ function PlayerGridItem({ fnlPlayers }) {
           <Box
             sx={{
               display: "flex",
-              gap: "20px",
               alignItems: "center",
               justifyContent: "center",
               width: "100%",
@@ -78,12 +70,12 @@ function PlayerGridItem({ fnlPlayers }) {
               sx={{
                 borderRight: "solid 1px #e0e0e0",
                 borderLeft: "solid 1px #e0e0e0",
-                padding: "0 8px", // From .player-number
+                padding: "0 8px", 
               }}
             >
               # {player.number}
             </Typography>
-            <Typography>{player.position}</Typography>
+            <Typography sx={{pl: 0.5}}>{player.position}</Typography>
           </Box>
         </Box>
       ))}

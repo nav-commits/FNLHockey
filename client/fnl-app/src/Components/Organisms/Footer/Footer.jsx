@@ -24,10 +24,10 @@ function Footer() {
             justifyContent: 'space-evenly',
             alignItems: 'center',
             padding: '20px',
-            gap: { xs: '20px', md: '500px' }, // Responsive gap
+            gap: { xs: '20px', md: '500px' }, 
             backgroundColor: 'black',
             color: 'white',
-            flexDirection: { xs: 'column', md: 'row' }, // Responsive direction
+            flexDirection: { xs: 'column', md: 'row' }, 
         }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <img
@@ -35,7 +35,7 @@ function Footer() {
                     alt='Description'
                     style={{ height: '60px', width: '60px' }}
                 />
-                <Typography variant="h1" component="h1" sx={{ fontSize: '2rem', fontStyle:'italic' }}>FNL</Typography>
+                <Typography variant="h4" sx={{ fontStyle:'italic' }}>FNL</Typography>
             </Box>
             <Box sx={{
                 display: 'flex',

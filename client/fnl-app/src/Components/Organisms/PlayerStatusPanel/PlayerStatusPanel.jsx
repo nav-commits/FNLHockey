@@ -23,7 +23,7 @@ const PlayerStatusPanel = ({
   resetFilter,
 }) => {
   return (
-    <Container>
+    <Container sx={{mt: 15,}}>
       {!hasCategoriesWithPlayers() ? (
         <Container maxWidth="sm" sx={{ mt: 5, mb: 5 }}>
           <Alert

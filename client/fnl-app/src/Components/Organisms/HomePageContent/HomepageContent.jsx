@@ -22,7 +22,7 @@ function HomePageContent() {
           mb: 4, // margin bottom
         }}
       >
-        <Typography variant="h3" sx={{ mb: 2, mt: 2 }}>
+        <Typography variant="h3" sx={{ mb: 2, mt: 8 }}>
           Welcome to the FNL Hockey League!
         </Typography>
         <Typography>

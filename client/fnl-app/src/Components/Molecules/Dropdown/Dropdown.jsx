@@ -48,7 +48,7 @@ const Dropdown = ({ weeks, onClick, filterByWeek, open, idx }) => {
                         <Box
                             key={index}
                             sx={{
-                                padding: '2px',
+                                p: 1.5, 
                                 backgroundColor: idx === index ? 'rgb(217, 217, 217)' : 'inherit',
                                 '&:hover': {
                                     backgroundColor: 'action.hover',

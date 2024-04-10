@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Typography,
-  List,
-  ListItem,
-  Paper,
-} from "@mui/material";
+import { Box, Typography, List, ListItem, Paper } from "@mui/material";
 import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
 import teamWhiteImage from "../../../Images/FNLWhiteBackground.png";
 import teamBlackImage from "../../../Images/FNLWhite.jpeg";
@@ -17,7 +11,6 @@ const MakeTeams = ({
   handleDragStart,
   handleDrop,
   onSubmit,
-  disabled,
   user,
   handleChange,
   saveTeams,
@@ -90,11 +83,14 @@ const MakeTeams = ({
                         key={idx}
                         sx={{ draggable: true }}
                         onDragStart={(e) => handleDragStart(e, player)}
+                        draggable
                       >
-                        <Typography variant="body2">
-                          {player.position === "goalie"
-                            ? `Goalie: ${player.name}`
-                            : player.name}
+                        <Typography variant="body1">
+                          {idx + 1}.{" "}
+                          {player.position === "Goalie"
+                            ? `${player.position}: `
+                            : ""}
+                          {player.name}
                         </Typography>
                       </ListItem>
                     ))}
@@ -105,153 +101,155 @@ const MakeTeams = ({
         </Box>
         <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
           {user.name === "Navdeep Dhamrait" && hasPlayers ? (
-            <Box
-              sx={{
-                mt: 4,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              {/* Series Winner Input */}
-              <Typography variant="h6" sx={{ mb: 2 }}>
-                Series Winner
-              </Typography>
-              <Input
-                name="seriesWinner.winner"
-                value={teams.seriesWinner.winner}
-                onChange={handleChange}
-                placeholder="Series Winner"
-                sx={{ mb: 3, width: "250px" }}
-              />
-              {/* Team White Stats Inputs */}
-              <Typography variant="h6" sx={{ mt: 2, mb: 1 }}>
-                Team White
-              </Typography>
+            <>
               <Box
                 sx={{
+                  mt: 4,
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  width: "100%",
                 }}
               >
-                <Box sx={{ display: "flex", mb: 1, alignItems: "center" }}>
-                  <Typography sx={{ width: "100px" }}>Wins:</Typography>
-                  <Input
-                    type="number"
-                    name="teamWhite.wins"
-                    value={teams.teamWhite.wins}
-                    onChange={handleChange}
-                    placeholder="Wins"
-                    sx={{ ml: 1, width: "150px" }}
-                  />
+                {/* Series Winner Input */}
+                <Typography variant="h6" sx={{ mb: 2 }}>
+                  Series Winner
+                </Typography>
+                <Input
+                  name="seriesWinner.winner"
+                  value={teams.seriesWinner.winner}
+                  onChange={handleChange}
+                  placeholder="Series Winner"
+                  sx={{ mb: 3, width: "250px" }}
+                />
+                {/* Team White Stats Inputs */}
+                <Typography variant="h6" sx={{ mt: 2, mb: 1 }}>
+                  Team White
+                </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                >
+                  <Box sx={{ display: "flex", mb: 1, alignItems: "center" }}>
+                    <Typography sx={{ width: "100px" }}>Wins:</Typography>
+                    <Input
+                      type="number"
+                      name="teamWhite.wins"
+                      value={teams.teamWhite.wins}
+                      onChange={handleChange}
+                      placeholder="Wins"
+                      sx={{ ml: 1, width: "150px" }}
+                    />
+                  </Box>
+                  <Box sx={{ display: "flex", mb: 1, alignItems: "center" }}>
+                    <Typography sx={{ width: "100px" }}>Losses:</Typography>
+                    <Input
+                      type="number"
+                      name="teamWhite.losses"
+                      value={teams.teamWhite.losses}
+                      onChange={handleChange}
+                      sx={{ ml: 1, width: "150px" }}
+                    />
+                  </Box>
+                  <Box sx={{ display: "flex", mb: 3, alignItems: "center" }}>
+                    <Typography sx={{ width: "100px" }}>Ties:</Typography>
+                    <Input
+                      type="number"
+                      name="teamWhite.ties"
+                      value={teams.teamWhite.ties}
+                      onChange={handleChange}
+                      placeholder="Ties"
+                      sx={{ ml: 1, width: "150px" }}
+                    />
+                  </Box>
                 </Box>
-                <Box sx={{ display: "flex", mb: 1, alignItems: "center" }}>
-                  <Typography sx={{ width: "100px" }}>Losses:</Typography>
-                  <Input
-                    type="number"
-                    name="teamWhite.losses"
-                    value={teams.teamWhite.losses}
-                    onChange={handleChange}
-                    sx={{ ml: 1, width: "150px" }}
-                  />
-                </Box>
-                <Box sx={{ display: "flex", mb: 3, alignItems: "center" }}>
-                  <Typography sx={{ width: "100px" }}>Ties:</Typography>
-                  <Input
-                    type="number"
-                    name="teamWhite.ties"
-                    value={teams.teamWhite.ties}
-                    onChange={handleChange}
-                    placeholder="Ties"
-                    sx={{ ml: 1, width: "150px" }}
-                  />
+                {/* Team Black Stats Inputs */}
+                <Typography variant="h6" sx={{ mt: 2, mb: 1 }}>
+                  Team Black
+                </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                >
+                  <Box sx={{ display: "flex", mb: 1, alignItems: "center" }}>
+                    <Typography sx={{ width: "100px" }}>Wins:</Typography>
+                    <Input
+                      type="number"
+                      name="teamBlack.wins"
+                      value={teams.teamBlack.wins}
+                      onChange={handleChange}
+                      placeholder="Wins"
+                      sx={{ ml: 1, width: "150px" }}
+                    />
+                  </Box>
+                  <Box sx={{ display: "flex", mb: 1, alignItems: "center" }}>
+                    <Typography sx={{ width: "100px" }}>Losses:</Typography>
+                    <Input
+                      type="number"
+                      name="teamBlack.losses"
+                      value={teams.teamBlack.losses}
+                      onChange={handleChange}
+                      placeholder="Losses"
+                      sx={{ ml: 1, width: "150px" }}
+                    />
+                  </Box>
+                  <Box sx={{ display: "flex", mb: 3, alignItems: "center" }}>
+                    <Typography sx={{ width: "100px" }}>Ties:</Typography>
+                    <Input
+                      type="number"
+                      name="teamBlack.ties"
+                      value={teams.teamBlack.ties}
+                      onChange={handleChange}
+                      placeholder="Ties"
+                      sx={{ ml: 1, width: "150px" }}
+                    />
+                  </Box>
                 </Box>
               </Box>
-              {/* Team Black Stats Inputs */}
-              <Typography variant="h6" sx={{ mt: 2, mb: 1 }}>
-                Team Black
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  width: "100%",
-                }}
-              >
-                <Box sx={{ display: "flex", mb: 1, alignItems: "center" }}>
-                  <Typography sx={{ width: "100px" }}>Wins:</Typography>
-                  <Input
-                    type="number"
-                    name="teamBlack.wins"
-                    value={teams.teamBlack.wins}
-                    onChange={handleChange}
-                    placeholder="Wins"
-                    sx={{ ml: 1, width: "150px" }}
-                  />
-                </Box>
-                <Box sx={{ display: "flex", mb: 1, alignItems: "center" }}>
-                  <Typography sx={{ width: "100px" }}>Losses:</Typography>
-                  <Input
-                    type="number"
-                    name="teamBlack.losses"
-                    value={teams.teamBlack.losses}
-                    onChange={handleChange}
-                    placeholder="Losses"
-                    sx={{ ml: 1, width: "150px" }}
-                  />
-                </Box>
-                <Box sx={{ display: "flex", mb: 3, alignItems: "center" }}>
-                  <Typography sx={{ width: "100px" }}>Ties:</Typography>
-                  <Input
-                    type="number"
-                    name="teamBlack.ties"
-                    value={teams.teamBlack.ties}
-                    onChange={handleChange}
-                    placeholder="Ties"
-                    sx={{ ml: 1, width: "150px" }}
-                  />
-                </Box>
-              </Box>
-            </Box>
+            </>
           ) : null}
         </Box>
+      </Box>
+      {hasPlayers && 
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          mt: 5,
+        }}
+      >
+        <MUIButton
+          marginTop={"20px"}
+          title="Save"
+          color="black"
+          textColor="white"
+          width={"150px"}
+          type={"button"}
+          onClick={saveTeams}
+          icon={<KeyboardArrowRightOutlinedIcon />}
+        />
 
-        {hasPlayers && (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              mt: 5,
-            }}
-          >
-            <MUIButton
-              marginTop={"20px"}
-              title="Save"
-              color="black"
-              textColor="white"
-              width={"205px"}
-              type={"button"}
-              onClick={saveTeams}
-              icon={<KeyboardArrowRightOutlinedIcon />}
-            />
-            {disabled && (
-              <MUIButton
-                title="Submit"
-                color="black"
-                textColor="white"
-                width={"150px"}
-                type="submit"
-                marginTop={"20px"}
-                icon={<KeyboardArrowRightOutlinedIcon />}
-              />
-            )}
-          </Box>
+        {user.name === "Navdeep Dhamrait" && hasPlayers && (
+          <MUIButton
+            title="Submit"
+            color="black"
+            textColor="white"
+            width={"150px"}
+            type="submit"
+            marginTop={"20px"}
+            icon={<KeyboardArrowRightOutlinedIcon />}
+          />
         )}
       </Box>
+      }
     </Box>
   );
 };

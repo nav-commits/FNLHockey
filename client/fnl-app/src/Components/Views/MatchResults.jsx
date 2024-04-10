@@ -60,7 +60,7 @@ const MatchResults = () => {
     const weeks = matchupResults.map((_, index) => index + 1);
 
     return (
-        <Box sx={{ padding: '20px' }}>
+        <Box sx={{ p: '20px' , mt: 15}}>
             <Box sx={{ position: 'relative' }}>
                 <Dropdown
                     weeks={weeks}

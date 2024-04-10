@@ -69,7 +69,7 @@ const PlayersListContent = () => {
           flexDirection: "row",
           justifyContent: "flex-end",
           marginRight: "80px",
-          marginTop: "50px",
+          marginTop: "90px",
         },
         ".players-page-content": {
           padding: "10px",

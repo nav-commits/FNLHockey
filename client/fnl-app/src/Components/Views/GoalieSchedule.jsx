@@ -5,7 +5,6 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
 import { Box,Typography } from "@mui/material";
 import MUIButton from "../Atoms/Button/MUIButton";
-import { Menu, MenuItem } from "@mui/material";
 
 const GoalieSchedule = () => {
   const [open, setOpen] = useState(false);
@@ -44,7 +43,9 @@ const GoalieSchedule = () => {
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          margin: "20px",
+
+          m: 2, 
+          mt: 12
         }}
       >
         <Typography variant="h4" sx={{ padding: "12px" }}>
@@ -61,7 +62,7 @@ const GoalieSchedule = () => {
           Back
         </MUIButton>
       </Box>
-
+      <Box sx={{ position: "relative" }}>
       <Box
         sx={{
           width: 200,
@@ -71,44 +72,46 @@ const GoalieSchedule = () => {
           mt: 1,
           p: 1,
           cursor: "pointer",
+          textAlign: "center",
         }}
         onClick={onClick}
       >
-        <Typography textAlign="center">Filter By Year</Typography>
+        <Typography>Filter by year</Typography>
       </Box>
-
-      <Menu
-        id="simple-menu"
-        anchorEl={null}
-        keepMounted
-        open={open}
-        onClick={onClick}
-        sx={{
-          ".MuiPaper-root": {
-            border: 1,
-            borderColor: "#cfcdcd",
-            borderTop: 0,
-            maxWidth: 240,
+      {open && (
+        <Box
+          sx={{
+            width: 216,
+            position: "absolute",
+            border: "1px solid #cfcdcd",
+            borderTop: "none",
+            zIndex: 1,
+            ml: 1.00,
+            backgroundColor: "#fff",
             maxHeight: 200,
             overflowY: "auto",
-          },
-        }}
-      >
-        {years.map((year, index) => (
-          <MenuItem
-            key={index}
-            onClick={() => filterScheduleYear(year)}
-            sx={{
-              backgroundColor:
-                year === selectedYear ? "rgb(217, 217, 217)" : "inherit",
-              fontWeight: year === selectedYear ? 800 : 400,
-         
-            }}
-          >
-            {year}
-          </MenuItem>
-        ))}
-      </Menu>
+          }}
+        >
+          {years.map((year) => (
+            <Box
+              key={year}
+              onClick={() => filterScheduleYear(year)}
+              sx={{
+                p: 1.5,
+                backgroundColor: selectedYear === year ? "rgb(217, 217, 217)" : "inherit",
+                "&:hover": {
+                  backgroundColor: "action.hover",
+                },
+                cursor: "pointer",
+                textAlign: "center",
+              }}
+            >
+              <Typography>{year}</Typography>
+            </Box>
+          ))}
+        </Box>
+      )}
+    </Box>
 
       <Box>
         {filterSchedule.map((game) => (

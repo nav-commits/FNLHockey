@@ -23,7 +23,7 @@ const MatchUpMobileTablet = ({
   const { isMobile } = useDeviceDetect();
 
   return (
-    <Box>
+    <Box sx={{ mt: 10}}>
       {Object.entries(statusOfPLayers).map(([statusKey, statusValue]) => {
         if (statusValue.players && statusValue.players.length > 0) {
           return (

@@ -11,7 +11,7 @@ function PlayerStatusMobileTablet({
   categories,
 }) {
   return (
-    <Box sx={{ p: 1 }}>
+    <Box sx={{ p: 1, mt: 10 }}>
     {players.map((player) => (
       <Box key={player._id} sx={{
         p: 2,

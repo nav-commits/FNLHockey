@@ -14,11 +14,20 @@ import {
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import MenuIcon from "@mui/icons-material/Menu"; // For the hamburger menu
+import MenuIcon from "@mui/icons-material/Menu";
 import { useAuth0 } from "@auth0/auth0-react";
 import myImage from "../../../Images/FNLBlack.png";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import HomeIcon from "@mui/icons-material/Home"; // Example icon
+import StatusIcon from "@mui/icons-material/Assessment"; // Example icon
+import SportsSoccerIcon from "@mui/icons-material/SportsSoccer"; // Example icon
+import ScoreIcon from "@mui/icons-material/Score"; // Example icon
+import GroupIcon from "@mui/icons-material/Group"; // Example icon
+import EventIcon from "@mui/icons-material/Event"; // Example icon
+import ListItemIcon from "@mui/material/ListItemIcon";
 
 function Navbar() {
   const { getID } = useContext(mainContext);
@@ -39,17 +48,21 @@ function Navbar() {
 
   const navLinks = isAuthenticated
     ? [
-        { path: "/", text: "Home" },
-        { path: "/Status", text: "Status" },
-        { path: `/Match/${getIDMatchUp()}`, text: "Match" },
-        { path: "/Scores", text: "Scores" },
-        { path: "/Players", text: "Players" },
-        { path: "/Schedule", text: "Schedule" },
+        { path: "/", text: "Home", icon: <HomeIcon /> },
+        { path: "/Status", text: "Status", icon: <StatusIcon /> },
+        {
+          path: `/Match/${getIDMatchUp()}`,
+          text: "Match",
+          icon: <SportsSoccerIcon />,
+        },
+        { path: "/Scores", text: "Scores", icon: <ScoreIcon /> },
+        { path: "/Players", text: "Players", icon: <GroupIcon /> },
+        { path: "/Schedule", text: "Schedule", icon: <EventIcon /> },
       ]
     : [{ path: "/", text: "" }];
   const location = useLocation();
   return (
-    <AppBar position="sticky" sx={{ bgcolor: "black", p: 1 }}>
+    <AppBar sx={{ bgcolor: "black", p: 0.5 }}>
       {!isMobile && (
         <Toolbar
           sx={{
@@ -74,44 +87,44 @@ function Navbar() {
                 />
               </Link>
               <Typography
-                variant="h6"
+                variant="h4"
                 sx={{ fontStyle: "italic", color: "white" }}
               >
                 FNL
               </Typography>
             </Box>
 
-            <List
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                padding: 0,
-                gap: "10px", // Reduce gap between items if needed
-              }}
-            >
-              {navLinks.map(({ path, text }) => (
-                <ListItem
-                  key={path}
-                  component={Link}
-                  to={path}
-                  sx={{
-                    color: "white",
-                    textDecoration: "none",
-                    borderBottom:
-                      location.pathname === path ? "3px solid white" : "none",
-                    py: 0.5, // Reduce vertical padding
-                    px: 1, // Adjust horizontal padding as needed
-                    "&:hover": { backgroundColor: "transparent" },
-                    // Further adjustment for the active link to reduce space below
-                    marginBottom: location.pathname === path ? "-3px" : 0, // Adjust if active link has too much space below
-                    justifyContent: "center",
-                  }}
-                >
-                  <ListItemText primary={text} sx={{ my: 0 }} />{" "}
-                  {/* Minimize vertical margin within the item */}
-                </ListItem>
-              ))}
-            </List>
+            {isAuthenticated && (
+              <Tabs
+                value={location.pathname}
+                textColor="inherit"
+                variant="scrollable"
+                scrollButtons="auto"
+                sx={{
+                  ".MuiTab-root": { color: "grey.500" },
+                  ".Mui-selected": { color: "grey.100" },
+                  ".MuiTabs-indicator": { backgroundColor: "#c0c0c0" },
+                  pb: 0,
+                }}
+              >
+                {navLinks.map((link, index) => (
+                  <Tab
+                    key={index}
+                    label={link.text}
+                    value={link.path}
+                    component={Link}
+                    to={link.path}
+                    sx={{
+                      color: "white",
+                      textDecoration: "none",
+                      pb: 0,
+                      mb: 0,
+                    }}
+                  />
+                ))}
+              </Tabs>
+            )}
+
             <IconButton
               onClick={handleAuthAction}
               sx={{ color: "white" }}
@@ -125,30 +138,68 @@ function Navbar() {
 
       {isMobile && (
         <>
-          <IconButton
-            sx={{ color: "white", ml: "auto" }}
-            onClick={toggleSidebar}
-          >
-            <MenuIcon />
-          </IconButton>
+          <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
+            <Link to="/">
+              <img
+                src={myImage}
+                alt="Logo"
+                style={{ height: "60px", width: "60px" }}
+              />
+            </Link>
+            <Typography
+              variant="h6"
+              sx={{ fontStyle: "italic", color: "white" }}
+            >
+              FNL
+            </Typography>
+            <IconButton
+              sx={{ color: "white", ml: "auto" }}
+              onClick={toggleSidebar}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Box>
+
           <Drawer anchor="left" open={isSidebarOpen} onClose={toggleSidebar}>
             <List sx={{ width: "250px" }}>
-              {navLinks.map(({ path, text }) => (
+              {navLinks.map(({ path, text, icon }) => (
                 <ListItem
                   button
                   key={path}
                   component={Link}
                   to={path}
                   onClick={toggleSidebar}
+                  sx={{
+                    "& .MuiListItemIcon-root": {
+                      minWidth: "auto",
+                    },
+                    display: "flex",
+                    justifyContent: "space-around",
+                    gap: "20px",
+                    color: "black",
+                    alignItems: "center",
+                  }}
                 >
+                  <ListItemIcon sx={{ color: "black" }}>{icon}</ListItemIcon>
                   <ListItemText primary={text} />
                 </ListItem>
               ))}
-              <ListItem button onClick={handleAuthAction}>
-                <ListItem>
-                  {isAuthenticated ? <ExitToAppIcon /> : <AccountCircleIcon />}
-                </ListItem>
-              </ListItem>
+              <Box sx={{ ml: 2, mt: 2 }} onClick={handleAuthAction}>
+                {isAuthenticated ? (
+                  <Box
+                    sx={{ display: "flex", gap: "20px", alignItems: "center" }}
+                  >
+                    <ExitToAppIcon /> Logout
+                  </Box>
+                ) : (
+                  <Box
+                    sx={{ display: "flex", gap: "20px", alignItems: "center" }}
+                  >
+                    <AccountCircleIcon />
+                    Login
+                  </Box>
+                )}
+              </Box>
             </List>
           </Drawer>
         </>
