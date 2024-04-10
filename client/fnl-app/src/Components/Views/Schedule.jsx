@@ -6,6 +6,8 @@ import { useState } from "react";
 import ScheduleGameItems from "../Organisms/ScheduleGameItems/ScheduleGameitems";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
+import MUIButton from "../Atoms/Button/MUIButton";
+import { Box, Typography } from "@mui/material";
 
 const Schedule = () => {
   const [open, setOpen] = useState(false);
@@ -48,47 +50,83 @@ const Schedule = () => {
   };
   return (
     <>
-      <div
-        style={{ display: "flex", justifyContent: "space-between", margin: "20px" }}
-      >
-         <h1 style={{ padding: "10px" }}>Schedule</h1>
-        <span onClick={moveToNextPage} style={{ display: "flex", alignItems: "center", cursor:'pointer' }}>
-          <p>Goalie Schedule</p> <ArrowForwardIcon />{" "}
-        </span>
-      </div>
-     
-      <div onClick={onClick} className="filter-dropdown-button">
-        <p style={{ textAlign: "center" }}>Filter By Year</p>
-      </div>
-      {open && (
-        <div className="week-filter-container">
-          {years.map((year, index) => (
-            <div
-              onClick={() => filterScheduleYear(year)}
-              key={index}
-              style={{
-                backgroundColor:
-                  year === selectedYear ? "rgb(217, 217, 217)" : null,
-              }}
-              className="week-item"
-            >
-              <p className="week-text">{year}</p>
-            </div>
-          ))}
-        </div>
-      )}
+      <Box sx={{ display: "flex", justifyContent: "space-between", m: 2, mt: 12}}>
+        <Typography variant="h4" sx={{ p: 1 }}>
+          Schedule
+        </Typography>
+        <MUIButton
+          title="Goalie Schedule"
+          onClick={moveToNextPage}
+          icon={<ArrowForwardIcon />}
+          color="white"
+          textColor="black"
+          type="button"
+        />
+      </Box>
 
-      <div>
-        {filterSchedule.map((game) => (
-          <ScheduleGameItems
-            key={game.date}
-            game={game}
-            getFormattedDate={getFormattedDate}
-            teamWhiteImage={teamWhiteImage}
-            teamBlackImage={teamBlackImage}
-          />
-        ))}
-      </div>
+      <Box sx={{ position: "relative" }}>
+        <Box
+          sx={{
+            width: 200,
+            border: 1,
+            borderColor: "#cfcdcd",
+            ml: 1,
+            mt: 1,
+            p: 1,
+            cursor: "pointer",
+            textAlign: "center",
+          }}
+          onClick={onClick}
+        >
+          <Typography>Filter by year</Typography>
+        </Box>
+        {open && (
+          <Box
+            onClick={onClick}
+            sx={{
+              width: 216,
+              position: "absolute",
+              border: "1px solid #cfcdcd",
+              borderTop: "none",
+              zIndex: 1,
+              ml: 1.00,
+            
+              backgroundColor: "#fff",
+              maxHeight: 200,
+              overflowY: "auto",
+            }}
+          >
+            {years.map((year) => (
+              <Box
+                key={year}
+                onClick={() => filterScheduleYear(year)}
+                sx={{
+                  p: 1.5,
+                  backgroundColor:
+                    selectedYear === year ? "rgb(217, 217, 217)" : "inherit",
+                  "&:hover": {
+                    backgroundColor: "action.hover",
+                  },
+                  cursor: "pointer",
+                  textAlign: "center",
+                }}
+              >
+                {year}
+              </Box>
+            ))}
+          </Box>
+        )}
+      </Box>
+
+      {filterSchedule.map((game) => (
+        <ScheduleGameItems
+          key={game.date}
+          game={game}
+          getFormattedDate={getFormattedDate}
+          teamWhiteImage={teamWhiteImage}
+          teamBlackImage={teamBlackImage}
+        />
+      ))}
     </>
   );
 };

@@ -1,21 +1,35 @@
 import React from 'react';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import { tabs } from '../../../Utils/Data';
-import './TabsContent.css';
 
 const TabsContent = ({ activeLabel, handleTabClick }) => {
     return (
-        <div className='card-container'>
+        <Box sx={{
+            backgroundColor: '#fff',
+            borderRadius: '5px',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+            transition: 'box-shadow 0.3s ease-in-out',
+            padding: '20px',
+            margin: '20px',
+            color: 'black',
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '30px',
+        }}>
             {tabs.map((tab, i) => (
-                <div
-                    className='tab-item'
-                    style={{ borderBottom: activeLabel === i ? '3px solid black' : null }}
-                    onClick={() => handleTabClick(i, tab.label)}
+                <Typography
                     key={i}
+                    sx={{
+                        cursor: 'pointer',
+                        borderBottom: activeLabel === i ? '3px solid black' : 'none'
+                    }}
+                    onClick={() => handleTabClick(i, tab.label)}
                 >
                     {tab.label}
-                </div>
+                </Typography>
             ))}
-        </div>
+        </Box>
     );
 };
 

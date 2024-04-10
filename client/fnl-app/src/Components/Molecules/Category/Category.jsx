@@ -1,25 +1,40 @@
 import React from 'react';
-import './Category.css';
+import { Box, Typography } from '@mui/material';
 import RenderPlayer from '../../Molecules/RenderPlayer/RenderPlayer';
 
 const Category = ({ category, handleDrop, handleDragStart, categoryIcon }) => {
     return (
-        <div
-            className='category'
+        <Box
+            sx={{
+                border: '2px solid #000',
+                borderRadius: '15px',
+                backgroundColor: '#f9f9f9',
+                margin: '10px',
+                padding: '20px',
+            }}
             onDragOver={(e) => e.preventDefault()}
             onDrop={(e) => handleDrop(e, category)}
         >
-            <h3 className='category-title'>
+            <Typography
+                variant="h6" 
+            >
                 {category.name} {categoryIcon(category.name)}
-            </h3>
-            <ol>
+            </Typography>
+            <Box
+                component="ol"
+                sx={{
+                    listStyle: 'none',
+                    padding: 0,
+                    margin: 0,
+                }}
+            >
                 {category.players.map((player, idx) => (
-                    <li key={idx}>
+                    <Typography variant='body1' key={idx}>
                         <RenderPlayer player={player} handleDragStart={handleDragStart} />
-                    </li>
+                    </Typography>
                 ))}
-            </ol>
-        </div>
+            </Box>
+        </Box>
     );
 };
 
